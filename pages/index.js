@@ -2,6 +2,8 @@ import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
+import Link from "next/link";
+import BlogDate from "../components/date";
 
 function myAge() {
   const BORN = new Date("2000-07-31");
@@ -23,8 +25,9 @@ function myAge() {
 
   return diffInYears;
 }
-
 export default function Home({ allPostsData }) {
+  console.log(allPostsData.date);
+  console.log("ici");
   return (
     <Layout home>
       <Head>
@@ -53,11 +56,11 @@ export default function Home({ allPostsData }) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
+              <Link href={`/posts/${id}`}>{title}</Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <small className={utilStyles.lightText}>
+                <BlogDate dateString={date} />
+              </small>
             </li>
           ))}
         </ul>

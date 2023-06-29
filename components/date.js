@@ -1,10 +1,14 @@
 import { parseISO, format } from "date-fns";
 
-export default function Date({ dateString }) {
+export default function BlogDate({ dateString }) {
   const date = parseISO(dateString);
-  return (
-    <time dateTime={dateString}>
-      Written the {format(date, "dd  MMMM  yyyy.")}
-    </time>
-  );
+  if (date == null) {
+    return console.log("error dans date");
+  } else {
+    return (
+      <time dateTime={dateString}>
+        Written the {format(date, "dd  MMMM  yyyy")}
+      </time>
+    );
+  }
 }
