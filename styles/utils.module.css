@@ -49,3 +49,6 @@
 .lightText {
   color: #666;
 }
+.loading {
+  font-weight: bold;
+}

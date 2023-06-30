@@ -4,6 +4,7 @@ import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
 import Link from "next/link";
 import BlogDate from "../components/date";
+import Posts from "../components/postscomponent";
 
 function myAge() {
   const BORN = new Date("2000-07-31");
@@ -25,9 +26,8 @@ function myAge() {
 
   return diffInYears;
 }
-export default function Home({ allPostsData }) {
-  console.log(allPostsData.date);
-  console.log("ici");
+
+export default function Home() {
   return (
     <Layout home>
       <Head>
@@ -53,27 +53,17 @@ export default function Home({ allPostsData }) {
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog posts</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>{title}</Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <BlogDate dateString={date} />
-              </small>
-            </li>
-          ))}
-        </ul>
+        <Posts />
       </section>
     </Layout>
   );
 }
 
-export async function getStaticProps() {
+/*export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
   return {
     props: {
       allPostsData,
     },
   };
-}
+}*/
