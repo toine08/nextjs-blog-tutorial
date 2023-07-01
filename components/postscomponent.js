@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import utilStyles from "../styles/utils.module.css";
 import { cookies } from "next/dist/client/components/headers";
 import { getPosts } from "../lib/posts";
+import BlogDate from "./date";
+import Link from "next/link";
+
 export default function Posts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,9 +31,13 @@ export default function Posts() {
       <div>
         {posts.map((data) => (
           <div key={data.id}>
-            <h2 className={utilStyles.headingLg}>{data.title}</h2>
-            <small className={utilStyles.lightText}>{data.date}</small>
-            <p>by {data.author}</p>
+            <Link href={`/posts/${data.id}`}>
+              <h2 className={utilStyles.headingLg}>{data.title}</h2>
+            </Link>
+            <small>
+              <BlogDate dateString={data.date} />
+            </small>
+            <p>by {data.author}Paul Atréides</p>
           </div>
         ))}
       </div>
