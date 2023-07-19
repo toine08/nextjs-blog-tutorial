@@ -1,11 +1,15 @@
 import { createPost } from "../lib/posts";
-import { useState } from "react";
+import { useState, memo, useEffect, useRef } from "react";
+import Layout, { siteTitle } from "../components/layout";
+import utilStyles from "../styles/utils.module.css";
+import styles from "../styles/Editor.module.css";
+import * as Form from "@radix-ui/react-form";
+//<Editor />;
 
 export default function Editor() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -23,32 +27,35 @@ export default function Editor() {
       console.error("Failed to create post:", error);
     }
   };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="title">Titre :</label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="author">Nom d'auteur :</label>
-        <input type="text" id="author" value={author} />
-      </div>
-      <div>
-        <label htmlFor="content">Contenu :</label>
-        <textarea
-          id="content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
-      </div>
-      <button type="submit">Enregistrer</button>
-    </form>
+    <div className={styles.formWrapper}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="title">Title :</label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className={styles.inputGroup}>
+          <label htmlFor="author">Author :</label>
+          <input type="text" id="author" value={author} />
+        </div>
+        <div className={styles.inputGroup}>
+          <label htmlFor="content">Content :</label>
+          <textarea
+            id="content"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </div>
+        <button className={styles.button} type="submit">
+          Save
+        </button>
+      </form>
+    </div>
   );
 }
-
-//<Editor />;

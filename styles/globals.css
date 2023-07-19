@@ -1,3 +1,29 @@
+:root {
+  --text-color: #000;
+  --background-color: #fff;
+  --button-text-color: #fff;
+  --button-bg-color: #000;
+  --button-bg-hover-color: #777;
+  --input-border-color: #ddd;
+  --form-bg-color: #fff;
+  --formWrapper-bg-color: #f0f0f0;
+  --link-color: #0070f3;
+  --link-hover-color: #0070f3;
+}
+
+[data-theme="dark"] {
+  --text-color: #fff;
+  --background-color: #000;
+  --button-text-color: #000;
+  --button-bg-color: #fff;
+  --button-bg-hover-color: #888;
+  --input-border-color: #222;
+  --form-bg-color: #222;
+  --formWrapper-bg-color: #000;
+  --link-color: #0f0;
+  --link-hover-color: #0f0;
+}
+
 html,
 body {
   padding: 0;
@@ -6,6 +32,8 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.6;
   font-size: 18px;
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 * {
@@ -13,12 +41,13 @@ body {
 }
 
 a {
-  color: #0070f3;
+  color: var(--link-color);
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
+  color: var(--link-hover-color);
 }
 
 img {
