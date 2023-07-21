@@ -5,7 +5,7 @@
   --button-bg-color: #000;
   --button-bg-hover-color: #777;
   --input-border-color: #ddd;
-  --form-bg-color: #fff;
+  --form-bg-color: #dedede;
   --formWrapper-bg-color: #f0f0f0;
   --link-color: #0070f3;
   --link-hover-color: #0070f3;
@@ -53,4 +53,10 @@ a:hover {
 img {
   max-width: 100%;
   display: block;
+}
+
+@media (max-width: 800px) {
+  img {
+    display: none;
+  }
 }

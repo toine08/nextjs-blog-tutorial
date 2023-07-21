@@ -3,7 +3,7 @@ import { useState, memo, useEffect, useRef } from "react";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import styles from "../styles/Editor.module.css";
-import * as Form from "@radix-ui/react-form";
+
 //<Editor />;
 
 export default function Editor() {
@@ -29,33 +29,35 @@ export default function Editor() {
   };
 
   return (
-    <div className={styles.formWrapper}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.inputGroup}>
-          <label htmlFor="title">Title :</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="author">Author :</label>
-          <input type="text" id="author" value={author} />
-        </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="content">Content :</label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
-        </div>
-        <button className={styles.button} type="submit">
-          Save
-        </button>
-      </form>
-    </div>
+    <Layout>
+      <div className={styles.formWrapper}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.inputGroup}>
+            <label htmlFor="title">Title :</label>
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="author">Author :</label>
+            <input type="text" id="author" value={author} />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="content">Content :</label>
+            <textarea
+              id="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </div>
+          <button className={styles.button} type="submit">
+            Save
+          </button>
+        </form>
+      </div>
+    </Layout>
   );
 }

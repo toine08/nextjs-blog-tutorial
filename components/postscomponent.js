@@ -32,12 +32,12 @@ export default function Posts() {
         {posts.map((data) => (
           <div key={data.id}>
             <Link href={`/posts/${data.id}`}>
-              <h2 className={utilStyles.headingLg}>{data.title}</h2>
+              <h2 className={utilStyles.headingMd}>{data.title}</h2>
             </Link>
             <small>
               <BlogDate dateString={data.date} />
             </small>
-            <p>by {data.author}Paul Atréides</p>
+            <hr></hr>
           </div>
         ))}
       </div>

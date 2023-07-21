@@ -1,9 +1,6 @@
 import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
-import { getSortedPostsData } from "../lib/posts";
-import Link from "next/link";
-import BlogDate from "../components/date";
 import Posts from "../components/postscomponent";
 
 function myAge() {
@@ -19,14 +16,12 @@ function myAge() {
 
   if (
     monthToday < monthBirthday ||
-    (monthToday === monthBirthday && dayToday < dayBirthday)
+    (monthToday === monthBirthday && dayToday === dayBirthday)
   ) {
-    diffInYears--;
+    diffInYears;
   }
-
-  return diffInYears;
+  return diffInYears--;
 }
-
 export default function Home() {
   return (
     <Layout home>

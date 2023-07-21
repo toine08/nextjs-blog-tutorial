@@ -6,6 +6,8 @@
   align-items: center;
   padding: 1rem;
   background-color: var(--primary-color);
+  margin-top: -2rem;
+  margin-bottom: -2rem;
 }
 
 .navbar ul {
@@ -35,8 +37,39 @@
   border-radius: 0.5rem;
   cursor: pointer;
   font-size: 1rem;
+  margin-left: 2rem;
 }
 
 .navbar button:hover {
-  background-color: var(--button-hover-bg-color);
+  background-color: #0f0;
+  color: black;
 }
+
+.login {
+  display: block;
+  margin-left: 5rem;
+  background-color: var(--primary-color);
+}
+
+/* Cache le menu hamburger par défaut */
+.hamburger {
+  background-color: black;
+  color: white;
+  border: none;
+  display: none;
+  font-size: 1.5rem;
+  position: absolute; /* Positionner absolument */
+  top: 0; /* Dans le coin supérieur gauche */
+  left: 0;
+}
+
+/* Sur les petits écrans, cache le menu de navigation et affiche le menu hamburger */
+@media (max-width: 400px) {
+  .hamburger {
+    display: none;
+  }
+}
+.login {
+  display: none;
+}
+/* Media query for screens smaller than 800px */

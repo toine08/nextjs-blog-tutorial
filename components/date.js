@@ -1,4 +1,5 @@
 import { parseISO, format } from "date-fns";
+import utilStyles from "../styles/utils.module.css";
 
 export default function BlogDate({ dateString }) {
   const date = parseISO(dateString);
@@ -6,8 +7,8 @@ export default function BlogDate({ dateString }) {
     return console.log("error dans date");
   } else {
     return (
-      <time dateTime={dateString}>
-        Written the {format(date, "dd  MMMM  yyyy")}
+      <time className={utilStyles.small} dateTime={dateString}>
+        {format(date, "dd  MMMM  yyyy")}
       </time>
     );
   }

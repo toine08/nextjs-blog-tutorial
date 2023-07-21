@@ -1,5 +1,5 @@
 import Head from "next/head";
-import styles from "./layout.module.css";
+import styles from "../styles/layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Navbar from "./navbar";
 import Image from "next/image";
@@ -28,7 +28,6 @@ export default function Layout({ children, home }) {
       <header className={styles.header}>
         {home ? (
           <>
-            <Navbar />
             <Image
               priority
               src="/images/profile.jpg"
@@ -59,6 +58,9 @@ export default function Layout({ children, home }) {
           </>
         )}
       </header>
+      <nav>
+        <Navbar />
+      </nav>
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>

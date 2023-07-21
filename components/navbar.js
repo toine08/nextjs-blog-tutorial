@@ -3,7 +3,8 @@ import Link from "next/link";
 import styles from "../styles/Navbar.module.css";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
@@ -23,19 +24,30 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={styles.navbar}>
-      <ul>
-        <li>
-          <Link href="/">Home</Link>
-        </li>
-        <li>
-          <Link href="/editor">Editor</Link>
-        </li>
-      </ul>
-
-      <button onClick={toggleTheme}>
-        Toggle {theme === "light" ? "Dark" : "Light"} Mode
+    <>
+      <button className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
+        &#9776;
       </button>
-    </nav>
+      <nav
+        className={`${styles.navbar} ${isOpen ? styles.open : styles.closed}`}
+      >
+        {" "}
+        <ul>
+          <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
+            <Link href="/editor">Editor</Link>
+          </li>
+        </ul>
+        <div className={styles.login}>
+          <Link href="/">Login/</Link>
+          <Link href="/">Signup</Link>
+        </div>
+        <button onClick={toggleTheme}>
+          {theme === "dark" ? "Light" : "Dark"}
+        </button>
+      </nav>
+    </>
   );
 }
