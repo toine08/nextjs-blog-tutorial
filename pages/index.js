@@ -38,10 +38,10 @@ export default function Home() {
           </p>
           <p>
             You can contact me on{" "}
-            <a href="https://twitter.com/Toine0805" target="_blank">
+            <a href="https://twitter.com/togido_" target="_blank">
               twitter
             </a>{" "}
-            if you want.
+            if you want or via <a href="mailto:togodio@proton.me"> </a>email.
           </p>
           <hr />
         </div>
