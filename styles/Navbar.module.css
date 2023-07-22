@@ -46,7 +46,7 @@
 }
 
 .login {
-  display: block;
+  display: flex;
   margin-left: 5rem;
   background-color: var(--primary-color);
 }
@@ -68,8 +68,9 @@
   .hamburger {
     display: none;
   }
+  .login {
+    display: none;
+  }
 }
-.login {
-  display: none;
-}
+
 /* Media query for screens smaller than 800px */

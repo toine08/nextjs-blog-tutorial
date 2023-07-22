@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const name = "Toine";
-export const siteTitle = "Next.js Sample Website";
+export const siteTitle = "togido blog";
 export default function Layout({ children, home }) {
   return (
     <div className={styles.container}>
@@ -28,6 +28,9 @@ export default function Layout({ children, home }) {
       <header className={styles.header}>
         {home ? (
           <>
+            <nav className={styles.nav}>
+              <Navbar />
+            </nav>
             <Image
               priority
               src="/images/profile.jpg"
@@ -58,9 +61,6 @@ export default function Layout({ children, home }) {
           </>
         )}
       </header>
-      <nav>
-        <Navbar />
-      </nav>
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>

@@ -41,7 +41,7 @@ export default function Home() {
             <a href="https://twitter.com/togido_" target="_blank">
               twitter
             </a>{" "}
-            if you want or via <a href="mailto:togodio@proton.me"> </a>email.
+            if you want or via <a href="mailto:togodio@proton.me">email</a>.
           </p>
           <hr />
         </div>

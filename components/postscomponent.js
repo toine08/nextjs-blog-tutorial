@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import utilStyles from "../styles/utils.module.css";
-import { cookies } from "next/dist/client/components/headers";
 import { getPosts } from "../lib/posts";
 import BlogDate from "./date";
 import Link from "next/link";

@@ -25,7 +25,7 @@ export default function Navbar() {
 
   return (
     <>
-      <button className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
+      <button className={styles.hamburger} onClick={() => setIsOpen(isOpen)}>
         &#9776;
       </button>
       <nav
@@ -41,8 +41,7 @@ export default function Navbar() {
           </li>
         </ul>
         <div className={styles.login}>
-          <Link href="/">Login/</Link>
-          <Link href="/">Signup</Link>
+          <Link href="/auth">Login/Signup</Link>
         </div>
         <button onClick={toggleTheme}>
           {theme === "dark" ? "Light" : "Dark"}
