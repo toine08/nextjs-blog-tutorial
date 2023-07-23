@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "../styles/Navbar.module.css";
+import utilStyles from "../styles/utils.module.css";
+import { useUser } from "../pages/_app";
+import { supabase } from "../lib/supabaseClient";
+import { BsMoon, BsSun } from "react-icons/bs";
 
 export default function Navbar() {
   const [theme, setTheme] = useState("dark");
-  const [isOpen, setIsOpen] = useState(false);
+  const { user } = useUser();
 
   useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
@@ -25,12 +29,7 @@ export default function Navbar() {
 
   return (
     <>
-      <button className={styles.hamburger} onClick={() => setIsOpen(isOpen)}>
-        &#9776;
-      </button>
-      <nav
-        className={`${styles.navbar} ${isOpen ? styles.open : styles.closed}`}
-      >
+      <nav className={styles.navbar}>
         {" "}
         <ul>
           <li>
@@ -40,12 +39,18 @@ export default function Navbar() {
             <Link href="/editor">Editor</Link>
           </li>
         </ul>
-        <div className={styles.login}>
-          <Link href="/auth">Login/Signup</Link>
+        <div className={styles.buttons}>
+          <div className={styles.login}>
+            {user ? (
+              <button onClick={() => supabase.auth.signOut()}>Sign out</button>
+            ) : (
+              <Link href="/auth">Login/Signup</Link>
+            )}
+          </div>
+          <button className={styles.Theme} onClick={toggleTheme}>
+            {theme === "dark" ? <BsSun /> : <BsMoon />}{" "}
+          </button>
         </div>
-        <button onClick={toggleTheme}>
-          {theme === "dark" ? "Light" : "Dark"}
-        </button>
       </nav>
     </>
   );

@@ -16,7 +16,31 @@
   justify-content: center;
   padding: 1rem;
 }
+.inputGroup {
+  margin-bottom: 20px;
+}
 
+.inputGroup label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.endForm {
+  display: flex;
+  flex-direction: column;
+}
 .button {
   cursor: pointer;
   padding: 10px 20px;
@@ -29,8 +53,8 @@
   font-size: 0.75rem;
 }
 .Switch {
-  background-color: var(--button-bg-color);
-  color: var(--button-text-color);
+  background-color: var(--form-bg-color);
+  color: var(--input-text-color);
   border: none;
   padding: 10px 20px;
   border-radius: 0.2rem;

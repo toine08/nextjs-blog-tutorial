@@ -1,91 +1,109 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { supabase } from "../lib/supabaseClient";
 import styles from "../styles/Auth.module.css";
 import Layout from "../components/layout";
-import utilStyles from "../styles/utils.module.css";
-import Navbar from "../components/navbar";
 
 export default function Auth() {
-  const [form, setForm] = useState("login"); // 'login' ou 'signup'
+  const router = useRouter();
+  const [form, setForm] = useState("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  const handleLogin = async (email, password) => {
-    try {
-      setLoading(true);
-      const { error } = await supabase.auth.signIn({ email, password });
-      if (error) throw error;
-    } catch (error) {
-      alert(error.error_description || error.message);
-    } finally {
-      setLoading(false);
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    setLoading(true);
+    setErrors({});
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setErrors({ login: error.message });
+    } else {
+      router.push("/");
     }
+    setLoading(false);
   };
 
-  const handleSignUp = async (email, password) => {
-    try {
-      setLoading(true);
-      const { error } = await supabase.auth.signUp({ email, password });
-      if (error) throw error;
-    } catch (error) {
-      alert(error.error_description || error.message);
-    } finally {
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setErrors({});
+    if (password !== confirmPassword) {
+      setErrors({ confirmPassword: "Passwords do not match" });
       setLoading(false);
+      return;
+    }
+    const { error } = await supabase.auth.signUp({ email, password });
+    if (error) {
+      setErrors({ signUp: error.message });
+      setLoading(false);
+    } else {
+      router.push("/");
     }
   };
-
   return (
     <Layout>
       <div className={styles.authForm}>
-        <div className={styles.form}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div className={styles.divButtons}>
-            {form === "login" ? (
-              <button
-                className={styles.button}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLogin(email, password);
-                }}
-                disabled={loading}
-              >
-                {loading ? "Loading" : "Log In"}
-              </button>
-            ) : (
-              <button
-                className={styles.button}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleSignUp(email, password);
-                }}
-                disabled={loading}
-              >
-                {loading ? "Loading" : "Sign Up"}
-              </button>
+        <form onSubmit={form === "login" ? handleLogin : handleSignUp}>
+          <h2>{form === "login" ? "Log In" : "Sign Up"}</h2>
+          <div className={styles.inputGroup}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {errors.email && (
+              <span className={styles.error}>{errors.email}</span>
             )}
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {errors.password && (
+              <span className={styles.error}>{errors.password}</span>
+            )}
+          </div>
+          {form === "signup" && (
+            <div className={styles.inputGroup}>
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              {errors.confirmPassword && (
+                <span className={styles.error}>{errors.confirmPassword}</span>
+              )}
+            </div>
+          )}
+          <div className={styles.endForm}>
+            <button className={styles.button} type="submit" disabled={loading}>
+              {loading ? "Loading..." : form === "login" ? "Log In" : "Sign Up"}
+            </button>
             <button
               className={styles.Switch}
-              onClick={(e) => {
-                e.preventDefault();
-                setForm(form === "login" ? "signup" : "login");
-              }}
+              type="button"
+              onClick={() => setForm(form === "login" ? "signup" : "login")}
             >
               Switch to {form === "login" ? "Sign Up" : "Log In"}
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </Layout>
   );

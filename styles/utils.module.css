@@ -83,3 +83,11 @@
 .loading {
   font-weight: bold;
 }
+
+.theme {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5rem;
+  background-color: var(--primary-color);
+}

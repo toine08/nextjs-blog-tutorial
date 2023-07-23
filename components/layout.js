@@ -4,64 +4,47 @@ import utilStyles from "../styles/utils.module.css";
 import Navbar from "./navbar";
 import Image from "next/image";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/react";
 
-const name = "Toine";
-export const siteTitle = "togido blog";
 export default function Layout({ children, home }) {
+  const name = "togidoo blog";
+
   return (
     <div className={styles.container}>
+      <Navbar />
+
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="description"
-          content="Learn how to build a personal website using Next.js"
-        />
+        <meta name="description" content="togidoo blog" />
         <meta
           property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
+          content={
+            "https://yfzehetlohzcenorunze.supabase.co/storage/v1/object/sign/togidoo.blog/img/card.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ0b2dpZG9vLmJsb2cvaW1nL2NhcmQucG5nIiwiaWF0IjoxNjkwMTE5MTM2LCJleHAiOjE3MTAxMTkxMzZ9.YQHjVxMLSXeCcIjDHnf6MmMbcIgtPiF1JxGgnZ-ZJOw&t=2023-07-23T13%3A32%3A16.296Z"
+          }
         />
-        <meta name="og:title" content={siteTitle} />
+        <meta name="og:title" content={name} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <header className={styles.header}>
         {home ? (
           <>
-            <nav className={styles.nav}>
-              <Navbar />
-            </nav>
-            <Image
-              priority
-              src="/images/profile.jpg"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt="Profile Picture"
-            />
+            <nav className={styles.nav}></nav>
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
           </>
         ) : (
           <>
-            <Link href="/">
-              <Image
-                priority
-                src="/images/profile.jpg"
-                className={utilStyles.borderCircle}
-                height={144}
-                width={144}
-                alt="Profile Picture"
-              />
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/" className={utilStyles.colorInherit}>
+            <h2 className={utilStyles.heading2Xl}>
+              <Link href="/" className={utilStyles.heading2Xl}>
                 {name}
               </Link>
             </h2>
           </>
         )}
       </header>
-      <main>{children}</main>
+      <main>
+        {children}
+        <Analytics />
+      </main>
       {!home && (
         <div className={styles.backToHome}>
           <Link href="/">← Back to home </Link>
