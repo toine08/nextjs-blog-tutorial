@@ -38,6 +38,9 @@ export default function Navbar() {
           <li>
             <Link href="/editor">Editor</Link>
           </li>
+          <li>
+            <Link href="/profils/">Editor</Link>
+          </li>
         </ul>
         <div className={styles.buttons}>
           <div className={styles.login}>
