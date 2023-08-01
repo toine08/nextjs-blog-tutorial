@@ -17,16 +17,15 @@ export default function Auth() {
 
   const notify = () =>
     toast.success(
-      "A confirmation email has been sent. Check your inbox and confirm to login. 🚀",
+      "A confirmation email has been sent. Check your inbox and confirm to login.",
       {
         position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: theme === "dark" ? "dark" : "Light",
+        style: {
+          background: "green",
+          color: "white",
+        },
+        duration: 3000,
+        icon: "🚀",
       }
     );
 
@@ -120,6 +119,7 @@ export default function Auth() {
             >
               Switch to {form === "login" ? "Sign Up" : "Log In"}
             </button>
+            <button onClick={notify}>notify</button>
           </div>
         </form>
       </div>
