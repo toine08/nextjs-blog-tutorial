@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import { supabase } from "../lib/supabaseClient";
 import "../styles/globals.css";
-
+import { Toaster } from "react-hot-toast";
 export const UserContext = createContext();
 
 export default function App({ Component, pageProps }) {
@@ -28,6 +28,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <UserContext.Provider value={{ user }}>
+      <Toaster />
       <Component {...pageProps} />
     </UserContext.Provider>
   );

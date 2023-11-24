@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { supabase } from "../lib/supabaseClient";
 import styles from "../styles/Auth.module.css";
 import Layout from "../components/layout";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Auth() {
   const router = useRouter();
@@ -12,6 +13,21 @@ export default function Auth() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const { theme } = router.query;
+
+  const notify = () =>
+    toast.success(
+      "A confirmation email has been sent. Check your inbox and confirm to login.",
+      {
+        position: "top-right",
+        style: {
+          background: "green",
+          color: "white",
+        },
+        duration: 3000,
+        icon: "🚀",
+      }
+    );
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -46,6 +62,7 @@ export default function Auth() {
       setLoading(false);
     } else {
       router.push("/");
+      notify();
     }
   };
   return (
@@ -102,6 +119,7 @@ export default function Auth() {
             >
               Switch to {form === "login" ? "Sign Up" : "Log In"}
             </button>
+            <button onClick={notify}>notify</button>
           </div>
         </form>
       </div>

@@ -7,12 +7,21 @@ import { supabase } from "../lib/supabaseClient";
 import { BsMoon, BsSun } from "react-icons/bs";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("");
   const { user } = useUser();
 
   useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
-    localTheme && setTheme(localTheme);
+    if (localTheme) {
+      setTheme(localTheme);
+      document.documentElement.setAttribute("data-theme", localTheme);
+    } else {
+      // If no theme is stored, set a default theme
+      const defaultTheme = "light";
+      window.localStorage.setItem("theme", defaultTheme);
+      document.documentElement.setAttribute("data-theme", defaultTheme);
+      setTheme(defaultTheme);
+    }
   }, []);
 
   const toggleTheme = () => {
@@ -38,13 +47,18 @@ export default function Navbar() {
           <li>
             <Link href="/editor">Editor</Link>
           </li>
+          <li>
+            <Link href="/profile/">Profile</Link>
+          </li>
         </ul>
         <div className={styles.buttons}>
           <div className={styles.login}>
             {user ? (
               <button onClick={() => supabase.auth.signOut()}>Sign out</button>
             ) : (
-              <Link href="/auth">Login/Signup</Link>
+              <Link href={{ pathname: "/auth", query: { theme } }}>
+                Login/Signup
+              </Link>
             )}
           </div>
           <button className={styles.Theme} onClick={toggleTheme}>
